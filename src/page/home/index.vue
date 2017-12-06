@@ -4,10 +4,10 @@
 <div class="banner-body-content"> 
 
 <LeftNavOneComponent></LeftNavOneComponent>
-<RightNavOneComponent></RightNavOneComponent>
+<CarouselComponent></CarouselComponent>
 <div class="clearfix"> </div>
 <LeftNavTwoComponent></LeftNavTwoComponent>
-<RightNavTwoComponent></RightNavTwoComponent>
+<NewsHComponent></NewsHComponent>
 <div class="clearfix"> </div>
 
 </div>
@@ -18,15 +18,15 @@
 <script>
 import LeftNavOneComponent from '../../components/leftNavOne.vue';
 import LeftNavTwoComponent from '../../components/leftNavTwo.vue';
-import RightNavOneComponent from '../../components/rightNavOne.vue';
-import RightNavTwoComponent from '../../components/rightNavTwo.vue';
+import CarouselComponent from '../../components/carousel.vue';
+import NewsHComponent from '../../components/newsH.vue';
 import FooterComponent from '../../components/footer.vue';
 export default{
      components: {
     LeftNavOneComponent,
     LeftNavTwoComponent,
-    RightNavOneComponent,
-    RightNavTwoComponent,
+    CarouselComponent,
+    NewsHComponent,
     FooterComponent
   },
 
