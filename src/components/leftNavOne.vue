@@ -1,7 +1,7 @@
 <template>
 <div class="col-xs-3 banner-body-left">
 				<div class="logo">
-					<h1><a href="index.html">Great <span>Taste</span></a></h1>
+					<h1><a href="javascript:;">Great <span>Taste</span></a></h1>
 				</div>
 				<div class="top-nav">
 					<nav class="navbar navbar-default">
@@ -19,11 +19,11 @@
 						<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 							<nav class="stroke">
 								<ul class="nav navbar-nav">
-									<li class="active"><a href="index.html"><i class="home"></i>Home</a></li>
-									<li><a href="photos.html" class="hvr-underline-from-left"><i class="picture1"></i>Photos</a></li>
-									<li><a href="blog.html" class="hvr-underline-from-left"><i class="edit1"></i>Blog</a></li>
-									<li><a href="short-codes.html" class="hvr-underline-from-left"><i class="text-size1"></i>Short Codes</a></li>
-									<li><a href="mail.html" class="hvr-underline-from-left"><i class="envelope1"></i>Mail US</a></li>
+									<li class="active"><a href="javascript:;"><i class="home"></i>主页</a></li>
+									<li><a href="javascript:;" class="hvr-underline-from-left"><i class="picture1"></i>照片</a></li>
+									<li><a href="javascript:;" class="hvr-underline-from-left"><i class="edit1"></i>博客</a></li>
+									<li><a href="javascript:;" class="hvr-underline-from-left"><i class="text-size1"></i>新闻</a></li>
+									<li><a href="javascript:;" class="hvr-underline-from-left"><i class="envelope1"></i>联系我们</a></li>
 								</ul>
 							</nav>
 						</div>
