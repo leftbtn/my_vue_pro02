@@ -2,53 +2,15 @@
 <div class="container">
 <div class="banner-body-content"> 
 <LeftNavOneComponent></LeftNavOneComponent>
-<div class="col-xs-9 banner-body-right">
-			<TitleBarComponent></TitleBarComponent>
-				<div class="blog">
-					<div class="blog-grid">
-						<div class="col-xs-4 blog-grid-left">
-							<a href="single.html"><img src="../../assets/images/1.jpg" alt=" " class="img-responsive"></a>
-						</div>
-						<div class="col-xs-8 blog-grid-right">
-							<h4><a href="single.html">sint occaecat cupidatat non proident</a></h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-								quis nostrud exercitation.</p>
-							<a href="single.html"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="blog-grid">
-						<div class="col-xs-4 blog-grid-left">
-							<a href="single.html"><img src="../../assets/images/2.jpg" alt=" " class="img-responsive"></a>
-						</div>
-						<div class="col-xs-8 blog-grid-right">
-							<h4><a href="single.html">Sed ut perspiciatis unde omnis iste natus</a></h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-								quis nostrud exercitation.</p>
-							<a href="single.html"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="blog-grid">
-						<div class="col-xs-4 blog-grid-left">
-							<a href="single.html"><img src="../../assets/images/3.jpg" alt=" " class="img-responsive"></a>
-						</div>
-						<div class="col-xs-8 blog-grid-right">
-							<h4><a href="single.html">At vero eos et accusamus et iusto odio</a></h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-								quis nostrud exercitation.</p>
-							<a href="single.html"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
+  <div class="col-xs-9 banner-body-right">
+			<TitleBarComponent :titleMsg="titleMsg"></TitleBarComponent>
+            <BlogListComponent :blogList="listData"></BlogListComponent>
+ </div>
 
+<PageBtnComponent></PageBtnComponent>
 
-            <div class="clearfix"> </div>
+<div class="clearfix"> </div>
+
 </div>
 </div>
 </template>
@@ -57,11 +19,47 @@
 <script>
 import LeftNavOneComponent from '../../components/leftNavOne.vue';
 import TitleBarComponent from '../../components/titleBar.vue';
+import BlogListComponent from './blogList.vue';
+import LeftNavTwoComponent from '../../components/leftNavTwo.vue';
+import PageBtnComponent from '../../components/pageBtn.vue';
 export default{
     components: {
     LeftNavOneComponent,
-      TitleBarComponent
+      TitleBarComponent,
+	  BlogListComponent,
+	  LeftNavTwoComponent,
+	  PageBtnComponent
   },
+  data(){
+	  return{
+		  titleMsg:{
+			  name:"Blog",
+			  msg:"But I must explain to you how all this mistaken idea of denouncing  pleasure and praising pain was born."
+		  },
+		  listData:[
+			  {
+				  id:"1",
+				  img: require("../../assets/images/1.jpg"),
+				  title:"sint occaecat cupidatat non proident",
+				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+			  },
+			    {
+				  id:"2",	
+				  img: require("../../assets/images/2.jpg"),
+				  title:"Sed ut perspiciatis unde omnis iste natus",
+				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+			  },
+			   {
+				  id:"3",
+				  img: require("../../assets/images/3.jpg"),
+				  title:"At vero eos et accusamus et iusto odio",
+				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+			  }
+		  ]
+			  
+		  
+	  }
+  }
 }
 
 

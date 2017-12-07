@@ -1,7 +1,17 @@
 <template>
 		<div class="gallery-head">
-					<h5>Blog</h5>
-					<p>But I must explain to you how all this mistaken idea of denouncing  pleasure and praising pain was born.</p>
+					<h5>{{titleMsg.name}}</h5>
+					<p>{{titleMsg.msg}}</p>
 				</div>
 </template>
 
+<script>
+export default{
+	props: {
+      titleMsg:{
+      
+      },
+            
+  },
+}
+</script>
