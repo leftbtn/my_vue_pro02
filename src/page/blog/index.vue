@@ -24,7 +24,7 @@ import LeftNavTwoComponent from '../../components/leftNavTwo.vue';
 import PageBtnComponent from '../../components/pageBtn.vue';
 export default{
     components: {
-    LeftNavOneComponent,
+      LeftNavOneComponent,
       TitleBarComponent,
 	  BlogListComponent,
 	  LeftNavTwoComponent,

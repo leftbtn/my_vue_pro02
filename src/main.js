@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'; // 引入axios
+import VueAxios from 'vue-axios';
+
 
 import './assets/css/bootstrap.css';
 import './assets/css/chocolat.css';
@@ -14,7 +17,7 @@ import './assets/js/jquery.chocolat.js';
 import './assets/js/jquery.wmuSlider.js';
 
 
-
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false
 

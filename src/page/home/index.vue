@@ -21,6 +21,7 @@ import LeftNavTwoComponent from '../../components/leftNavTwo.vue';
 import CarouselComponent from '../../components/carousel.vue';
 import NewsHComponent from '../../components/newsH.vue';
 import FooterComponent from '../../components/footer.vue';
+import qs from 'qs';
 export default{
      components: {
     LeftNavOneComponent,
@@ -29,7 +30,19 @@ export default{
     NewsHComponent,
     FooterComponent
   },
+  mounted() {
+    // console.log(cutString)
+  },
+computed: {},
+created(){
+  //获取轮播列表
 
+   this.axios.get("http://123.207.26.246/api/Carous").then(res => {
+      let data = res.data;
+     console.log(data);
+    });
+
+}
 }
 
 
