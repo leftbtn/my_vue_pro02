@@ -20,6 +20,9 @@ export default{
         blogList:{
 
         }
-    }
+	},
+	mounted(){
+		console.log(this.blogList);
+	}
 }
 </script>

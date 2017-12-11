@@ -1,18 +1,18 @@
 <template>
-<div class="container">
-<div class="banner-body-content"> 
-<LeftNavOneComponent></LeftNavOneComponent>
-  <div class="col-xs-9 banner-body-right">
-			<TitleBarComponent :titleMsg="titleMsg"></TitleBarComponent>
-            <BlogListComponent :blogList="listData"></BlogListComponent>
- </div>
+	<div class="container">
+		<div class="banner-body-content">
+			<LeftNavOneComponent></LeftNavOneComponent>
+			<div class="col-xs-9 banner-body-right">
+				<TitleBarComponent :titleMsg="titleMsg"></TitleBarComponent>
+				<BlogListComponent :blogList="listData"></BlogListComponent>
+			</div>
 
-<PageBtnComponent></PageBtnComponent>
+			<PageBtnComponent :pageData="pageData" v-if="pageData.isShow" @upup="change"></PageBtnComponent>
 
-<div class="clearfix"> </div>
+			<div class="clearfix"> </div>
 
-</div>
-</div>
+		</div>
+	</div>
 </template>
 
 
@@ -22,44 +22,54 @@ import TitleBarComponent from '../../components/titleBar.vue';
 import BlogListComponent from './blogList.vue';
 import LeftNavTwoComponent from '../../components/leftNavTwo.vue';
 import PageBtnComponent from '../../components/pageBtn.vue';
-export default{
-    components: {
-      LeftNavOneComponent,
-      TitleBarComponent,
-	  BlogListComponent,
-	  LeftNavTwoComponent,
-	  PageBtnComponent
-  },
-  data(){
-	  return{
-		  titleMsg:{
-			  name:"Blog",
-			  msg:"But I must explain to you how all this mistaken idea of denouncing  pleasure and praising pain was born."
-		  },
-		  listData:[
-			  {
-				  id:"1",
-				  img: require("../../assets/images/1.jpg"),
-				  title:"sint occaecat cupidatat non proident",
-				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
-			  },
-			    {
-				  id:"2",	
-				  img: require("../../assets/images/2.jpg"),
-				  title:"Sed ut perspiciatis unde omnis iste natus",
-				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
-			  },
-			   {
-				  id:"3",
-				  img: require("../../assets/images/3.jpg"),
-				  title:"At vero eos et accusamus et iusto odio",
-				  content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
-			  }
-		  ]
-			  
-		  
-	  }
-  }
+export default {
+	components: {
+		LeftNavOneComponent,
+		TitleBarComponent,
+		BlogListComponent,
+		LeftNavTwoComponent,
+		PageBtnComponent
+	},
+	data() {
+		return {
+			titleMsg: {
+				name: "Blog",
+				msg: "But I must explain to you how all this mistaken idea of denouncing  pleasure and praising pain was born."
+			},
+			listData: [
+
+			],
+			pageData:{
+             "isShow":false,
+			}
+
+
+		}
+	},
+	created() {
+	this.getBlogList(1);
+	},
+	methods:{
+		getBlogList(page){
+	//获取博客列表，以及分页信息
+		this.axios.get("http://localhost:5741/api/Blog?page="+ page +"&rows=3").then(res => {
+			let data = res.data;
+			this.listData = data.blogList;
+			let pageObject = new Object();
+			pageObject.pageIndex = data.pageIndex;
+			pageObject.pageSize = data.pageSize;
+			pageObject.totalCount = data.totalCount;
+			pageObject.totalPage = data.totalPage;
+			pageObject.isShow = true;
+			this.pageData = pageObject;
+		
+			
+		});
+		},
+		change(page) {
+        this.getBlogList(page);
+    }
+	}
 }
 
 

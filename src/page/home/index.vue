@@ -4,7 +4,7 @@
 <div class="banner-body-content"> 
 
 <LeftNavOneComponent></LeftNavOneComponent>
-<CarouselComponent></CarouselComponent>
+<CarouselComponent :CarouselList="CarouselList"></CarouselComponent>
 <div class="clearfix"> </div>
 <LeftNavTwoComponent></LeftNavTwoComponent>
 <NewsHComponent></NewsHComponent>
@@ -32,17 +32,26 @@ export default{
   },
   mounted() {
     // console.log(cutString)
+   
   },
-computed: {},
+  data (){
+    return {
+      //轮播图
+      CarouselList:[],
+    }
+  },
 created(){
   //获取轮播列表
 
-   this.axios.get("http://123.207.26.246/api/Carous").then(res => {
-      let data = res.data;
-     console.log(data);
+   this.axios.get("http://localhost:5741/api/Carous").then(res => {
+      let data = res.data.CarouselList;
+     
+      this.CarouselList = data;
     });
 
-}
+
+},
+computed: {}
 }
 
 
