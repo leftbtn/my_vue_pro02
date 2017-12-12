@@ -43,7 +43,7 @@ export default{
 created(){
   //获取轮播列表
 
-   this.axios.get("http://localhost:5741/api/Carous").then(res => {
+   this.axios.get("http://localhost:5741/api/Carous/GetCarouslList").then(res => {
       let data = res.data.CarouselList;
      
       this.CarouselList = data;

@@ -118,7 +118,7 @@ export default {
         },
 	methods: {
        getBlogDetail(id){
-         this.axios.get("http://localhost:5741/api/Blog/"+id+"").then(res => {
+         this.axios.get("http://localhost:5741/api/Blog/GetBlogDetail/"+id+"").then(res => {
 			let data = res.data;
 		
 		   this.blogDetail = data;
