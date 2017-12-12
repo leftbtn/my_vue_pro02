@@ -69,14 +69,11 @@ export default {
 
 	},
 	mounted() {
-		 this.$nextTick(function(){
-            $('.example1').wmuSlider();
-        })
 	},
 	updated() {
-        this.$nextTick(function(){
+      
              $('.example1').wmuSlider();
-        })
+      
     }
 }
 </script>

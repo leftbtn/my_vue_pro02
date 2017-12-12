@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<ul class="pagination pagination-sm">
-			<li class="disabled">
+			<li :class="pageData.pageIndex == 1?'disabled':''" v-on:click="PreAndLaterPageIndex(true)">
 				<a href="javacript:;">
 					<i class="fa fa-angle-left">«</i>
 				</a>
@@ -11,7 +11,7 @@
 				<a href="javaccript:;">{{index.index}}</a>
 			</li>
 
-			<li>
+			<li :class="pageData.pageIndex == pageData.totalPage?'disabled':''" v-on:click="PreAndLaterPageIndex(false)">
 				<a href="javascript:;">
 					<i class="fa fa-angle-right">»</i>
 				</a>
@@ -35,21 +35,27 @@ export default {
 
 	},
 	mounted() {
-		
-	
-	this.initData();
-		
+		this.initData();
 	},
-	updated () {
-    
-},
+	updated() {
+
+	},
 	methods: {
 		upDataPageIndex(index) {
-
 			this.$emit('upup', '' + index + ''); //主动触发upup方法，'hehe'为向父组件传递的数据
+		},
+		PreAndLaterPageIndex(val) {
+			let nowPage = this.pageData.pageIndex;
+			let goPage; //val ? nowPage - 1 : parseInt(nowPage)  + 1; 
+			if (val) {
+				goPage = nowPage - 1;
+				if (goPage <= 1) { goPage = 1 }
+			} else {
+				goPage = parseInt(nowPage) + 1;
+				if (goPage >= this.pageData.totalPage) { goPage = this.pageData.totalPage; }
+			}
         
-		
-
+			this.$emit('upup', '' + goPage + ''); //主动触发upup方法，'hehe'为向父组件传递的数据
 		},
 		initData() {
 			let data = this.pageData;
@@ -65,19 +71,19 @@ export default {
 			this.pageIndex = data.pageIndex;
 		}
 	},
-	watch:{
-            pageData(curVal,oldVal){
-　　　　　　　　　    this.initData();
-　　　　　　　　},
-　　　　　　　　example1:'',//值可以为methods的方法名
-　　　　　　　　example2:{
-　　　　　　　　　//注意：当观察的数据为对象或数组时，curVal和oldVal是相等的，因为这两个形参指向的是同一个数据对象
-　　　　　　　　　　handler(curVal,oldVal){
-　　　　　　　　　　　
-　　　　　　　　　　},
-　　　　　　　　　　deep:true
-　　　　　　　　}
-　　　　　　},
+	watch: {
+		pageData(curVal, oldVal) {
+			this.initData();
+		　　　　　　　　},
+		　　　　　　　　example1: '',//值可以为methods的方法名
+		　　　　　　　　example2: {
+			　　　　　　　　　//注意：当观察的数据为对象或数组时，curVal和oldVal是相等的，因为这两个形参指向的是同一个数据对象
+			　　　　　　　　　　handler(curVal, oldVal) {
+
+			　　　　　　　　　　},
+			　　　　　　　　　　deep: true
+		　　　　　　　　}
+	　　　　　　},
 }
 </script>
 

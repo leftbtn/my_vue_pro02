@@ -22,8 +22,8 @@
 									<li><router-link to="/home" :class="normal"><i class="home"></i>主页</router-link></li>
 									<li style="display:none"><router-link to="/#" :class="normal"><i class="picture1"></i>照片</router-link></li>
 									<li><router-link to="/blog" :class="normal"><i class="edit1"></i>博客</router-link></li>
-									<li><router-link to="#" :class="normal"><i class="text-size1"></i>新闻</router-link></li>
-									<li><router-link to="/#" :class="normal"><i class="envelope1"></i>联系我们</router-link></li>
+									<li style="display:none"><router-link to="#" :class="normal"><i class="text-size1"></i>新闻</router-link></li>
+									<li style="display:none"><router-link to="/#" :class="normal"><i class="envelope1"></i>联系我们</router-link></li>
 								</ul>
 							</nav>
 						</div>

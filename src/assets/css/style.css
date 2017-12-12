@@ -740,7 +740,7 @@ figure.effect-winston:hover figcaption::before {
 /*-- //blog --*/
 /*-- single --*/
 .single-left{
-	float:left;
+	
 	width:45%;
 	}
 .single-left p{
