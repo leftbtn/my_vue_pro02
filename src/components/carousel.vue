@@ -74,7 +74,7 @@ export default {
       
              $('.example1').wmuSlider();
       
-    }
+    }//aa
 }
 </script>
 
