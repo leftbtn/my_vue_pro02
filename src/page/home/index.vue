@@ -45,7 +45,6 @@ created(){
 
    this.axios.get("http://localhost:5741/api/Carous/GetCarouslList").then(res => {
       let data = res.data.CarouselList;
-     
       this.CarouselList = data;
     });
 

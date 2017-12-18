@@ -120,7 +120,6 @@ export default {
        getBlogDetail(id){
          this.axios.get("http://localhost:5741/api/Blog/GetBlogDetail/"+id+"").then(res => {
 			let data = res.data;
-		
 		   this.blogDetail = data;
 		   this.blogDetail.detail = data.detail.substring(1,data.detail.length-1);
 			
