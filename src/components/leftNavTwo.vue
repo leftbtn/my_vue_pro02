@@ -15,6 +15,7 @@
 						  <div class="panel-body">
 						<div class="input-group">
 								<span class="input-group-addon" id="l-account">帐号</span>
+<<<<<<< HEAD
 								<input type="text" class="form-control" placeholder="Account"  v-model="LoginInfo.Account" aria-describedby="l-account">
 							</div>
                         <div class="input-group">
@@ -22,6 +23,15 @@
 								<input type="password" class="form-control" placeholder="Password" v-model="LoginInfo.Password" aria-describedby="l-password">
 							</div>
                             <a href="javascript:;" v-on:click="login()"><span class="label label-warning">登录</span></a>
+=======
+								<input type="text" class="form-control" placeholder="Account" v-model="LoginInfo.UserId"  aria-describedby="l-account">
+							</div>
+                        <div class="input-group">
+								<span class="input-group-addon" id="l-password">密码</span>
+								<input type="text" class="form-control" placeholder="Password" v-model="LoginInfo.Password"  aria-describedby="l-password">
+							</div>
+                            <a href="javascript:;" v-on:click="login()" ><span class="label label-warning">登录</span></a>
+>>>>>>> abaa4d76d4a29ee8dd74693ded41f5b69f4f65fc
                            
 						  </div>
 						</div>
@@ -38,11 +48,23 @@
 						  <div class="panel-body">
 							<div class="input-group">
 								<span class="input-group-addon" id="r-account">帐号</span>
+<<<<<<< HEAD
 								<input type="text" class="form-control" placeholder="Account" v-model="RegisterInfo.Account" aria-describedby="r-account">
 							</div>
               <div class="input-group">
 								<span class="input-group-addon" id="r-password">密码</span>
 								<input type="password" class="form-control" placeholder="Password" v-model="RegisterInfo.Password" aria-describedby="r-password">
+=======
+								<input type="text" class="form-control" placeholder="Account"  v-model="RegisterInfo.UserId" aria-describedby="r-account">
+							</div>
+							 	<div class="input-group">
+								<span class="input-group-addon" id="r-NikeName">昵称</span>
+								<input type="text" class="form-control" placeholder="NikeName" v-model="RegisterInfo.NikeName" aria-describedby="r-account">
+							</div>
+               <div class="input-group">
+								<span class="input-group-addon" id="r-password">密码</span>
+								<input type="text" class="form-control" placeholder="Password" v-model="RegisterInfo.Password" aria-describedby="r-password">
+>>>>>>> abaa4d76d4a29ee8dd74693ded41f5b69f4f65fc
 							</div>
                <div class="input-group">
 								<span class="input-group-addon" id="r-nikename">昵称</span>
@@ -63,6 +85,7 @@
 			</div>
 </template>
 <script>
+<<<<<<< HEAD
 import qs from "qs";
 export default {
   data() {
@@ -96,6 +119,40 @@ export default {
       //   });
     }
   }
+=======
+export default {
+       data(){
+				 return{
+					 LoginInfo:{
+						 UserId:"",
+						 Password:""
+					 },
+					 RegisterInfo:{
+						  UserId:"",
+						 Password:"",
+						 NikeName:""
+					 }
+		     }
+			 },
+			 	methods:{
+					 login(){
+						 let config={
+              method:'post',
+              url: "http://123.207.26.246/api/Account/Login",
+              data:this.LoginInfo,
+              headers: {'X-Requested-With': 'XMLHttpRequest'},
+              requestHeader:{'Content-Type':'application/json'},
+              responseType: ''
+                      };
+              this.axios(config).then(function(res){
+								console.log(res)
+								}).catch(function(err)
+								{console.log(err)
+								})
+					 }
+				 }
+
+>>>>>>> abaa4d76d4a29ee8dd74693ded41f5b69f4f65fc
 };
 </script>
 <style>

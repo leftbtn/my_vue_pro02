@@ -52,7 +52,7 @@ export default {
 	methods:{
 		getBlogList(page){
 	//获取博客列表，以及分页信息
-		this.axios.get("http://localhost:5741/api/Blog/GetBlogList?page="+ page +"&rows=3").then(res => {
+		this.axios.get("http://123.207.26.246/api/Blog/GetBlogList?page="+ page +"&rows=3").then(res => {
 			let data = res.data;
 			this.listData = data.blogList;
 			let pageObject = new Object();
