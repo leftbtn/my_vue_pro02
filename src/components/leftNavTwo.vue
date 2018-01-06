@@ -1,9 +1,10 @@
 <template>
 <div class="col-xs-3 banner-body-left">
-				<div class="latest-news">
-					<h2>登录与注册</h2>
+				<div class="latest-news" >
+					<h2 v-if="!this.$store.state.IsLogin">登录与注册</h2>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					  <div class="panel panel-default">
+             <!-- 登录口 -->
+					  <div class="panel panel-default" v-if="!this.$store.state.IsLogin">
 						<div class="panel-heading" role="tab" id="headingOne">
 						  <h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -26,7 +27,9 @@
 						  </div>
 						</div>
 					  </div>
-					  <div class="panel panel-default">
+
+           <!-- 注册口 -->
+					  <div class="panel panel-default" v-if="!this.$store.state.IsLogin">
 						<div class="panel-heading" role="tab" id="headingTwo">
 						  <h4 class="panel-title">
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -52,13 +55,42 @@
 						  </div>
 						</div>
 					  </div>
+
+
+           <div class="panel panel-default" v-if="this.$store.state.IsLogin">
+						<div class="panel-heading" role="tab" id="headingOne">
+						  <h4 class="panel-title">
+							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							 个人信息
+							</a>
+						  </h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						  <div class="panel-body">
+							<div class="input-group">
+								<h5>账户名：</h5>
+							</div>
+              <div class="input-group">
+								<h5>昵称：</h5>
+							</div>
+               <div class="input-group">
+									<h5>注册时间：</h5>
+							</div>  
+                   <a href="javascript:;"><span class="label label-warning" v-on:click="loginOut()">退出</span></a>
+						  </div>
+						</div>
+					  </div>
+
 					  
 					</div>
 				
 					<h3>网站简介</h3>
-					<p>这是一个基于Vue.js搭建的个人网站，后台数据接口是基于.net的webapi生成。<br>接口地址:<a href="digouyouzhennanchi.xyz" target="_blank">digouyouzhennanchi.xyz</a>
+					<p>这是一个基于Vue.js搭建的个人网站，后台数据接口是基于.net的webapi生成。<br>接口地址:<a href="http://123.207.26.246/Help" target="_blank">digouyouzhennanchi.xyz</a>
 					<br>github地址:<a href="https://github.com/leftbtn" target="_blank">https://github.com/leftbtn</a></p>
 				</div>
+			
+			   
+				 
 			</div>
 </template>
 <script>
@@ -77,9 +109,13 @@ export default {
         Account: "",
         Password: "",
         NikeName: ""
-      }
+			},
     };
-  },
+	},
+	created() {
+	  this.$store.commit('UserIsLogin',localStorage.getItem("userid"))  
+   
+	},
   methods: {
     async login(LoginInfo) {
 			let data = new Object();
@@ -90,10 +126,10 @@ export default {
 	  http.post(api.postLoginApi,data).then(res=>{
 			 let r = res.data;
 			 console.log(r);
-			 localStorage.setItem('userid',r.msg);
-			//  localStorage.getItem('userid');
-			//  localStorage.removeItem('userid');
-
+       if(r.success){
+				this.$alert("登陆成功")
+				 localStorage.setItem('userid',r.msg);
+			 }
 
 		});
 		},
@@ -106,6 +142,20 @@ export default {
 				let r = res.data;
 				console.log(r);
 			})
+		},
+		async getUserInformation(){
+			let user = new Object();
+			let userId = localStorage.getItem('userid');
+			if(userId == null || userId == ""){
+				this.$message({message: "您还未登录，请先登录",type: 'error',showClose: true});
+				return
+				} 
+			http.get(api.getUserInformationForIdApi,userId).then(res=>{
+       
+			}); 
+		},
+		loginOut(){
+			localStorage.removeItem("userid")
 		}
   }
 };

@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import axios from 'axios'; // 引入axios
 import VueAxios from 'vue-axios';
+import ElementUI from 'element-ui'
+import "element-ui/lib/theme-chalk/index.css";
+
 
 
 import './assets/css/bootstrap.css';
@@ -17,14 +20,19 @@ import './assets/js/jquery.chocolat.js';
 import './assets/js/jquery.wmuSlider.js';
 
 
+
+
 Vue.use(VueAxios, axios);
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
+import store   from './vuex/store'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
