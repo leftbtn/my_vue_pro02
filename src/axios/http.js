@@ -1,19 +1,13 @@
 'use strict'
 import axios from 'axios'
 import qs from 'qs'
-// import Element from "element-ui";
-axios.interceptors.request.use(config => {
-  // loading
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+import Element from "element-ui";
 
-axios.interceptors.response.use(response => {
-  return response
-}, error => {
-  return Promise.resolve(error.response)
-})
+ //响应的拦截器
+
+
+
+
 
 function checkStatus(response) {
   // loading
@@ -32,30 +26,54 @@ function checkStatus(response) {
 
 function checkCode(res) {
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
-console.log(res)
 
-  // if (res.status === -404) {
+  if (res.status === -404) {
      
 
-  //   // Element.Message({
-  //   //   message: res.data.meta.msg,
-  //   //   type: 'error',
-  //   //   showClose: true
-  //   // })
-  // }
-  // if (res.data && res.data.meta.code!="200") {
+    Element.Message({
+      message: res.data.msg,
+      type: 'error',
+      showClose: true
+    })
+  }
+  if (res.data && !res.data.success) {
    
-  //   // Element.Message({
-  //   //   message: res.data.meta.msg,
-  //   //   type: 'error',
-  //   //   showClose: true
-  //   // })
-  // }
+    Element.Message({
+      message: res.data.msg,
+      type: 'error',
+      showClose: true
+    })
+  }
   return res
 }
 
 export default {
-  post(url, data) {
+  //请求地址,请求数据,是否需要菊花转
+  post(url, data,hasLoading) {
+    let needLoading = hasLoading == null || hasLoading == "" || hasLoading == undefined ? false : true ;
+    if(needLoading){
+      let loadingInstance;
+      //post请求的拦截器
+      axios.interceptors.request.use(config => {
+        loadingInstance = Element.Loading.service({
+          lock: true,
+          text: '正在请求数据',
+          //spinner: 'el-icon-loading',
+          background: 'rgba(255, 255, 255, 0)'  
+        });
+        return config
+      }, error => {
+        return Promise.reject(error)
+      });
+     
+      axios.interceptors.response.use(response => {
+        loadingInstance.close();
+        return response
+      }, error => {
+        return Promise.resolve(error.response)
+      })
+    }
+
     return axios({
       method: 'post',
       baseURL: 'http://123.207.26.246/api',
@@ -77,6 +95,13 @@ export default {
       )
   },
   get(url, params) {
+    axios.interceptors.request.use(config => {
+    
+       return config
+     }, error => {
+       return Promise.reject(error)
+     });
+
     return axios({
       method: 'get',
       baseURL: 'http://123.207.26.246/api',
