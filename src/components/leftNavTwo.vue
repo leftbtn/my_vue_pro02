@@ -68,13 +68,13 @@
 						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 						  <div class="panel-body">
 							<div class="input-group">
-								<h5>账户名：</h5>
+								<h5>账户名：{{UserInformation.Account}}</h5>
 							</div>
               <div class="input-group">
-								<h5>昵称：</h5>
+								<h5>昵称：{{UserInformation.NikeName}}</h5>
 							</div>
                <div class="input-group">
-									<h5>注册时间：</h5>
+									<h5>注册时间：{{UserInformation.CreateDateTime}}</h5>
 							</div>  
                    <a href="javascript:;"><span class="label label-warning" v-on:click="loginOut()">退出</span></a>
 						  </div>
@@ -110,26 +110,38 @@ export default {
         Password: "",
         NikeName: ""
 			},
+			UserInformation:{
+				Account:"",
+				CreateDateTime:"",
+				NikeName:""
+			}
     };
 	},
 	created() {
-	  this.$store.commit('UserIsLogin',localStorage.getItem("userid"))  
-   
+		this.$store.commit('UserIsLogin',localStorage.getItem("userid"));  
+		  if(this.$store.state.IsLogin){
+			this.getUserInformation();
+		}
+	},
+	mounted(){
+  
+	},
+	updated(){
+
 	},
   methods: {
     async login(LoginInfo) {
 			let data = new Object();
 			data.Account = LoginInfo.Account;
-		  data.Password = LoginInfo.Password;
-		//  const res = await http.post(api.postLoginApi,data);
-    //  console.log(res);    
-	  http.post(api.postLoginApi,data).then(res=>{
+		  data.Password = LoginInfo.Password; 
+	    http.post(api.postLoginApi,data,true).then(res=>{
 			 let r = res.data;
-			 console.log(r);
        if(r.success){
-				this.$alert("登陆成功")
+				 this.$message({message: "登录成功",type: 'success',showClose: true});
 				 localStorage.setItem('userid',r.msg);
-			 }
+				 this.getUserInformation();
+				 this.$store.commit("UserIsLogin",localStorage.getItem("userid"));
+			 }else{	this.$message({message: r.msg,type: 'error',showClose: true}); }
 
 		});
 		},
@@ -138,9 +150,14 @@ export default {
 			data.Account = RegisterInfo.Account;
 			data.Password = RegisterInfo.Password;
 			data.NikeName = RegisterInfo.NikeName;
-			http.post(api.postRegisterApi,data).then(res =>{
+			http.post(api.postRegisterApi,data,true).then(res =>{
 				let r = res.data;
-				console.log(r);
+			  if(r.success){
+							 this.$message({message: "注册成功",type: 'success',showClose: true});
+							 localStorage.setItem('userid',r.msg);
+							 this.getUserInformation();
+				       this.$store.commit("UserIsLogin",localStorage.getItem("userid"))
+				}else{	this.$message({message: r.msg,type: 'error',showClose: true});}
 			})
 		},
 		async getUserInformation(){
@@ -150,12 +167,26 @@ export default {
 				this.$message({message: "您还未登录，请先登录",type: 'error',showClose: true});
 				return
 				} 
-			http.get(api.getUserInformationForIdApi,userId).then(res=>{
-       
+			user.userid = userId;
+			http.get(api.getUserInformationForIdApi,user).then(res=>{
+				 let r = res.data;
+				 if(r.success){
+					 this.UserInformation.Account = r.Account;
+					 this.UserInformation.NikeName = r.NikeName;
+					 this.UserInformation.CreateDateTime = r.CreateDateTime;
+				 }else{ this.$message({message: "获取信息失败",type: 'error',showClose: true});}
 			}); 
 		},
 		loginOut(){
-			localStorage.removeItem("userid")
+        this.$confirm('是否退出当前登录状态?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+					localStorage.removeItem("userid");
+					this.$message({type: 'success', message: '退出成功!'});
+					this.$store.commit('UserIsLogin',localStorage.getItem("userid"));
+        }).catch(() => { });
 		}
   }
 };

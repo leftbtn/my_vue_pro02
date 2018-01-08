@@ -50,7 +50,7 @@ function checkCode(res) {
 export default {
   //请求地址,请求数据,是否需要菊花转
   post(url, data,hasLoading) {
-    let needLoading = hasLoading == null || hasLoading == "" || hasLoading == undefined ? false : true ;
+    let needLoading = hasLoading == null || hasLoading == "" || hasLoading == undefined || hasLoading ? false : true ;
     if(needLoading){
       let loadingInstance;
       //post请求的拦截器
