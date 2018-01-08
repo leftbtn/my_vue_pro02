@@ -4,7 +4,7 @@
 					<h2 v-if="!this.$store.state.IsLogin">登录与注册</h2>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
              <!-- 登录口 -->
-					  <div class="panel panel-default" v-if="!this.$store.state.IsLogin">
+					  <div class="panel panel-default" v-if="!IsLogin">
 						<div class="panel-heading" role="tab" id="headingOne">
 						  <h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -16,11 +16,11 @@
 						  <div class="panel-body">
 						<div class="input-group">
 								<span class="input-group-addon" id="l-account">帐号</span>
-								<input type="text" class="form-control" placeholder="Account"  v-model="LoginInfo.Account" aria-describedby="l-account">
+								<input type="text" class="form-control" placeholder="Account"  v-model.trim="LoginInfo.Account" aria-describedby="l-account">
 							</div>
                         <div class="input-group">
 								<span class="input-group-addon" id="l-password">密码</span>
-								<input type="password" class="form-control" placeholder="Password" v-model="LoginInfo.Password" aria-describedby="l-password">
+								<input type="password" class="form-control" placeholder="Password" v-model.trim="LoginInfo.Password" aria-describedby="l-password">
 							</div>
                             <a href="javascript:;" v-on:click="login(LoginInfo)"><span class="label label-warning">登录</span></a>
                            
@@ -29,7 +29,7 @@
 					  </div>
 
            <!-- 注册口 -->
-					  <div class="panel panel-default" v-if="!this.$store.state.IsLogin">
+					  <div class="panel panel-default" v-if="!IsLogin">
 						<div class="panel-heading" role="tab" id="headingTwo">
 						  <h4 class="panel-title">
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -41,15 +41,15 @@
 						  <div class="panel-body">
 							<div class="input-group">
 								<span class="input-group-addon" id="r-account">帐号</span>
-								<input type="text" class="form-control" placeholder="Account" v-model="RegisterInfo.Account" aria-describedby="r-account">
+								<input type="text" class="form-control" placeholder="Account" v-model.trim="RegisterInfo.Account" aria-describedby="r-account">
 							</div>
               <div class="input-group">
 								<span class="input-group-addon" id="r-password">密码</span>
-								<input type="password" class="form-control" placeholder="Password" v-model="RegisterInfo.Password" aria-describedby="r-password">
+								<input type="password" class="form-control" placeholder="Password" v-model.trim="RegisterInfo.Password" aria-describedby="r-password">
 							</div>
                <div class="input-group">
 								<span class="input-group-addon" id="r-nikename">昵称</span>
-								<input type="text" class="form-control" placeholder="NikeName" v-model="RegisterInfo.NikeName" aria-describedby="r-nikename">
+								<input type="text" class="form-control" placeholder="NikeName" v-model.trim="RegisterInfo.NikeName" aria-describedby="r-nikename">
 							</div>  
                    <a href="javascript:;"><span class="label label-danger" v-on:click="register(RegisterInfo)">注册</span></a>
 						  </div>
@@ -57,7 +57,7 @@
 					  </div>
 
 
-           <div class="panel panel-default" v-if="this.$store.state.IsLogin">
+           <div class="panel panel-default" v-if="IsLogin">
 						<div class="panel-heading" role="tab" id="headingOne">
 						  <h4 class="panel-title">
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -97,7 +97,7 @@
 
 import http from "../axios/http";
 import api from "../axios/api";
-
+import {mapState,mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -114,12 +114,15 @@ export default {
 				Account:"",
 				CreateDateTime:"",
 				NikeName:""
-			}
+			},
     };
 	},
+	computed:mapState({
+         IsLogin:state => state.IsLogin,
+	}),
 	created() {
 		this.$store.commit('UserIsLogin',localStorage.getItem("userid"));  
-		  if(this.$store.state.IsLogin){
+		  if(this.IsLogin){
 			this.getUserInformation();
 		}
 	},
@@ -187,7 +190,10 @@ export default {
 					this.$message({type: 'success', message: '退出成功!'});
 					this.$store.commit('UserIsLogin',localStorage.getItem("userid"));
         }).catch(() => { });
-		}
+		},
+		    ...mapMutations([
+         'UserIsLogin','SaveUserInformation'
+    ]),
   }
 };
 
