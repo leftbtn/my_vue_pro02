@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = new Object();
 state.IsLogin = false;
 state.UserInformation = new Object();
+state.NeedBannerBottom = true;
 
 
 /********改变使用的方法**********/
@@ -24,6 +25,10 @@ mutations.SaveUserInformation =  (data,user)=>{
     state.UserInformation.Account = user.Account;
     state.NikeName = user.NikeName;
     state.UserInformation.CreateDateTime = user.CreateDateTime;
+}
+//管理是否加载BannerBottom
+mutations.SetNeedBannerBottom = (data,bool)=>{
+    state.NeedBannerBottom = bool;
 }
 
 
