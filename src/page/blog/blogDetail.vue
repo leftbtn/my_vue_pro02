@@ -17,60 +17,10 @@
                   
 					</div>
 					<div class="clearfix"> </div>
-
-					
-					
-					<div class="three-com">
-						<h3>2 Comment
-							<span>on</span>
-							<label>Donec volutpat ligula non dapibus volutpat</label>
-						</h3>
-						<div class="tom-grid">
-							<div class="tom">
-								<img src="../../assets/images/co.png" alt=" ">
-							</div>
-							<div class="tom-right">
-								<div class="Hardy">
-									<h4>
-										<a href="#">Tom Hardy</a>
-									</h4>
-									<p>
-										<label>12 March 2016</label>
-									</p>
-								</div>
-								<div class="reply" style="display:none">
-									<a href="#">Reply</a>
-								</div>
-								<div class="clearfix"> </div>
-								<p class="lorem">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't.</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="tom-grid humour">
-							<div class="tom">
-								<img src="../../assets/images/co.png" alt=" ">
-							</div>
-							<div class="tom-right">
-								<div class="Hardy">
-									<h4>
-										<a href="#">Prad Pitt</a>
-									</h4>
-									<p>
-										<label>13 March 2016</label>
-									</p>
-								</div>
-								<div class="reply" style="display:none">
-									<a href="#">Reply</a>
-								</div>
-								<div class="clearfix"> </div>
-								<p class="lorem">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't.</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
+					<CommentListComponent></CommentListComponent>
 					<div class="leave-comment">
-						<h4>Leave your comment</h4>
-						<p>Suspendisse tempor tellus sed nisl semper, quis condimentum turpis pharetra.</p>
+						<h4>你的评论</h4>
+						<p>留下评论是对我最大的支持.</p>
 						<form>
 							<input type="text" placeholder="Name" required=" ">
 							<input type="text" placeholder="Email" required=" ">
@@ -90,11 +40,14 @@
 
 <script>
 import LeftNavOneComponent from '../../components/leftNavOne.vue';
+import CommentListComponent from '../../components/commentList.vue';
+import http from "../../axios/http";
+import api from "../../axios/api";
 export default {
 	components: {
-		LeftNavOneComponent
+		LeftNavOneComponent,
+		CommentListComponent
 	},
-
 	data() {
 		return {
 			blogDetail: {},
@@ -107,24 +60,33 @@ export default {
 
 	created() {
 	 let id = this.$route.params.id;
-     this.getBlogDetail(id);
+	 this.getBlogDetail(id);
+	 this.getCommentList(id);
 	},
 	mounted(){
 	
 	},
-	updated: function () {
-		let id = this.$route.params.id;
-            this.getBlogDetail(id);
+	updated () {
+		// let id = this.$route.params.id;
+        //     this.getBlogDetail(id);
         },
 	methods: {
        getBlogDetail(id){
-         this.axios.get("http://123.207.26.246/api/Blog/GetBlogDetail/"+id+"").then(res => {
+         this.axios.get("http://www.digouyouzhennanchi.xyz/api/Blog/GetBlogDetail/"+id+"").then(res => {
 			let data = res.data;
 		   this.blogDetail = data;
 		   this.blogDetail.detail = data.detail.substring(1,data.detail.length-1);
 			
 		});
-	   }
+	   },
+	   	getCommentList(id){
+		   let data = new Object();
+			 data.id = id;
+			 http.get(api.getCommentList,data).then(res=>{
+			 let r = res.data;
+			 console.log(r);
+		});
+		   }
 	}
 }
 </script>
