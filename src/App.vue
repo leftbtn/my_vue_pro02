@@ -9,12 +9,17 @@
       </keep-alive>
     
     </div>
+    <FooterComponent></FooterComponent>
   </div>
 </template>
 
 <script>
+import FooterComponent from './components/footer.vue'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+		FooterComponent
+	},
 }
 </script>
 
