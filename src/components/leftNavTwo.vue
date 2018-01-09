@@ -121,7 +121,6 @@ export default {
          IsLogin:state => state.IsLogin,
 	}),
 	created() {
-		this.$store.commit('UserIsLogin',localStorage.getItem("userid"));  
 		  if(this.IsLogin){
 			this.getUserInformation();
 		}
@@ -143,7 +142,7 @@ export default {
 				 this.$message({message: "登录成功",type: 'success',showClose: true});
 				 localStorage.setItem('userid',r.msg);
 				 this.getUserInformation();
-				 this.$store.commit("UserIsLogin",localStorage.getItem("userid"));
+				 this.$store.commit("UserIsLogin",r.msg);
 			 }else{	this.$message({message: r.msg,type: 'error',showClose: true}); }
 
 		});
@@ -156,10 +155,11 @@ export default {
 			http.post(api.postRegisterApi,data,true).then(res =>{
 				let r = res.data;
 			  if(r.success){
+				      alert(r.msg)
 							 this.$message({message: "注册成功",type: 'success',showClose: true});
 							 localStorage.setItem('userid',r.msg);
 							 this.getUserInformation();
-				       this.$store.commit("UserIsLogin",localStorage.getItem("userid"))
+				       this.$store.commit("UserIsLogin",r.msg)
 				}else{	this.$message({message: r.msg,type: 'error',showClose: true});}
 			})
 		},
@@ -188,7 +188,7 @@ export default {
         }).then(() => {
 					localStorage.removeItem("userid");
 					this.$message({type: 'success', message: '退出成功!'});
-					this.$store.commit('UserIsLogin',localStorage.getItem("userid"));
+					this.$store.commit('UserIsLogin',null);
         }).catch(() => { });
 		},
 		    ...mapMutations([

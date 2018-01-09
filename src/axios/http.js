@@ -12,7 +12,6 @@ import Element from "element-ui";
 function checkStatus(response) {
   // loading
   // 如果http状态码正常，则直接返回数据
-  console.log(response)
   if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
     return response
     // 如果不需要除了data之外的数据，可以直接 return response.data
@@ -38,11 +37,11 @@ function checkCode(res) {
   }
   if (res.data && !res.data.success) {
    
-    Element.Message({
-      message: res.data.msg,
-      type: 'error',
-      showClose: true
-    })
+    // Element.Message({
+    //   message: res.data.msg,
+    //   type: 'error',
+    //   showClose: true
+    // })
   }
   return res
 }
@@ -76,7 +75,7 @@ export default {
 
     return axios({
       method: 'post',
-      baseURL: 'http://123.207.26.246/api',
+      baseURL: 'http://www.digouyouzhennanchi.xyz/api',//http://123.207.26.246/api
       url,
       data: qs.stringify(data),
       timeout: 10000,
@@ -104,7 +103,7 @@ export default {
 
     return axios({
       method: 'get',
-      baseURL: 'http://123.207.26.246/api',
+      baseURL: 'http://www.digouyouzhennanchi.xyz/api',
       url,
       params, // get 请求时带的参数
       timeout: 10000,

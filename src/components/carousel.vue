@@ -15,7 +15,7 @@
 			</ul>
 		</div>
 
-		<div class="banner-bottom">
+		<div class="banner-bottom" v-if="NeedBannerBottom">
 			<div class="col-md-4 banner-left">
 				<div class="col-xs-3 banner-left1">
 					<div class="banner-left11">
@@ -57,17 +57,16 @@
 	</div>
 </template>
 <script>
+import {mapState,mapMutations } from 'vuex';
 export default {
 	props: {
 		CarouselList: {
 
 		}
 	},
-
-	computed: {
-
-
-	},
+	computed:mapState({
+         NeedBannerBottom:state => state.NeedBannerBottom,
+	}),
 	mounted() {
 	},
 	updated() {
