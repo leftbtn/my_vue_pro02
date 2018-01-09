@@ -27,7 +27,10 @@ export default new Router({
     },
     {
       path: "/blogDetail/:id",
-      component: blogDetail
+      component: blogDetail,
+      meta:{
+        requiresAuth:true,//需要做路由验证时打开
+      }
     },
   ]
 })
