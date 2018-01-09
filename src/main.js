@@ -26,8 +26,28 @@ Vue.use(VueAxios, axios);
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false
+import store from './vuex/store'
+var userid = localStorage.getItem("userid");
+store.commit("UserIsLogin",userid);
 
-import store   from './vuex/store'
+
+
+//使用路由验证
+router.beforeEach((to,form,next) =>{
+  if(to.path ==='/home'){
+    next();
+  }
+  else{
+    if(to.meta.requiresAuth && !store.state.IsLogin){
+      next({path:'/home'});
+    }
+    else{
+      next();
+    }
+  }
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
