@@ -870,14 +870,14 @@ figure.effect-winston:hover figcaption::before {
 	width:85%;
 	}
 .tom-right h4 a{
-	color:#D57D39;
+	color:#e6a23c;
     font-size: 1em;
     font-style: normal;
     margin: 0;
 	text-decoration:none;
 	}
 .tom-right h4 a:hover{
-	color:#212121;
+	color:#d57d39;
 }
 .tom-right p label{
 	color: #999;
@@ -903,7 +903,7 @@ figure.effect-winston:hover figcaption::before {
 	}
 .reply a{
 	padding: 8px 22px;
-    background: url(../images/update.png) no-repeat 16px 8px #D57D39;
+    background: url(../images/update.png) no-repeat 16px 8px #e6a23c;
     padding-left: 3.3em;
     display: block;
     color: #fff;
@@ -918,7 +918,7 @@ figure.effect-winston:hover figcaption::before {
 	text-decoration:none;
 	}
 .reply a:hover{
-	background:url(../images/update.png) no-repeat 16px 8px #212121;
+	background:url(../images/update.png) no-repeat 16px 8px #d57d39;
 	display:block;
 	text-decoration:none;
 	}

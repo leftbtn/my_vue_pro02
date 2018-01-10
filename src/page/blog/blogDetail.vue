@@ -17,24 +17,24 @@
                   
 					</div>
 					<div class="clearfix"> </div>
-					<CommentListComponent></CommentListComponent>
+					<CommentListComponent :commentList="commentList"></CommentListComponent>
 					<div class="leave-comment">
 						<h4>你的评论</h4>
 						<p>留下评论是对我最大的支持.</p>
 						<form>
-							<input type="text" placeholder="Name" required=" ">
-							<input type="text" placeholder="Email" required=" ">
-							<input type="text" placeholder="Your Website" required=" ">
+							
 							<textarea placeholder="Message" required=" "></textarea>
-							<input type="submit" value="Submit">
+							<input type="submit" value="提交">
 							<div class="clearfix"> </div>
 						</form>
 					</div>
 				</div>
 				<!-- //single -->
 			</div>
-			<div class="clearfix"> </div>
+			<div class="clearfix"></div>
 		</div>
+
+		
 	</div>
 </template>
 
@@ -51,6 +51,7 @@ export default {
 	data() {
 		return {
 			blogDetail: {},
+			commentList:[]
 			
 		}
 	},
@@ -84,6 +85,7 @@ export default {
 			 data.id = id;
 			 http.get(api.getCommentList,data).then(res=>{
 			 let r = res.data;
+			 this.commentList = r;
 			 console.log(r);
 		});
 		   }
