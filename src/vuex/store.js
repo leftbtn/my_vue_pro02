@@ -21,6 +21,7 @@ mutations.UserIsLogin = (state,data) =>{
  }
 //保存用户信息
 mutations.SaveUserInformation =  (data,user)=>{
+   
     state.UserInformation.userid = user.userid;
     state.UserInformation.Account = user.Account;
     state.NikeName = user.NikeName;

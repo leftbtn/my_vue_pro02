@@ -75,7 +75,7 @@ export default {
 
     return axios({
       method: 'post',
-      baseURL: 'http://www.digouyouzhennanchi.xyz/api',//http://123.207.26.246/api
+      baseURL: 'http://www.digouyouzhennanchi.xyz/api',// http://localhost:5741/api
       url,
       data: qs.stringify(data),
       timeout: 10000,
@@ -103,7 +103,7 @@ export default {
 
     return axios({
       method: 'get',
-      baseURL: 'http://www.digouyouzhennanchi.xyz/api',
+      baseURL: 'http://www.digouyouzhennanchi.xyz/api',//  http://localhost:5741/api
       url,
       params, // get 请求时带的参数
       timeout: 10000,

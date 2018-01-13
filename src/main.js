@@ -30,6 +30,23 @@ import store from './vuex/store'
 var userid = localStorage.getItem("userid");
 store.commit("UserIsLogin",userid);
 
+import http from "./axios/http";
+import api from "./axios/api";
+if(store.state.IsLogin){
+  let data = new Object();
+  data.userid = userid;
+  http.get(api.getUserInformationForIdApi,data).then(res=>{
+    let r = res.data;
+    if(r.success){
+      let user = new Object();
+      user.Account = r.Account;
+      user.NikeName = r.NikeName;
+      user.CreateDateTime = r.CreateDateTime;
+      user.userid = userid;
+      store.commit("SaveUserInformation",user);
+    }else{ this.$message({message: "获取信息失败,请重新登录",type: 'error',showClose: true});}
+ }); 
+}
 
 
 //使用路由验证

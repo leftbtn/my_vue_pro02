@@ -22,9 +22,8 @@
 						<h4>你的评论</h4>
 						<p>留下评论是对我最大的支持.</p>
 						<form>
-							
-							<textarea placeholder="Message" required=" "></textarea>
-							<input type="submit" value="提交">
+							<textarea placeholder="Message" required="" v-model="form.Details"></textarea>
+							<div class="submit_btn" @click="submitComment()">提交</div>
 							<div class="clearfix"> </div>
 						</form>
 					</div>
@@ -43,6 +42,7 @@ import LeftNavOneComponent from '../../components/leftNavOne.vue';
 import CommentListComponent from '../../components/commentList.vue';
 import http from "../../axios/http";
 import api from "../../axios/api";
+import { mapState, mapMutations } from "vuex";
 export default {
 	components: {
 		LeftNavOneComponent,
@@ -51,18 +51,25 @@ export default {
 	data() {
 		return {
 			blogDetail: {},
-			commentList:[]
-			
+			commentList:[],
+			form:{
+			ArticleId:"",
+			Details:""
+			}
 		}
 	},
 	beforeCreate: function () {
         
-        },
+		},
+	computed:mapState({
+         UserInformation:state => state.UserInformation,
+	}),
 
 	created() {
 	 let id = this.$route.params.id;
 	 this.getBlogDetail(id);
 	 this.getCommentList(id);
+	 this.form.ArticleId = id;
 	},
 	mounted(){
 	
@@ -72,23 +79,64 @@ export default {
         //     this.getBlogDetail(id);
         },
 	methods: {
-       getBlogDetail(id){
+       async getBlogDetail(id){
          this.axios.get("http://www.digouyouzhennanchi.xyz/api/Blog/GetBlogDetail/"+id+"").then(res => {
 			let data = res.data;
-		   this.blogDetail = data;
-		   this.blogDetail.detail = data.detail.substring(1,data.detail.length-1);
+		    this.blogDetail = data;
+		    this.blogDetail.detail = data.detail.substring(1,data.detail.length-1);
 			
 		});
 	   },
-	   	getCommentList(id){
+	   	async getCommentList(id){
 		   let data = new Object();
 			 data.id = id;
 			 http.get(api.getCommentList,data).then(res=>{
 			 let r = res.data;
-			 this.commentList = r;
-			 console.log(r);
+			 this.commentList = r.CommentList;
+			 
 		});
+		   },
+		async submitComment(){
+		   let  data = new Object();
+		   data.ArticleId = this.form.ArticleId;
+		   data.UserId = this.UserInformation.userid;
+		   data.Details = this.form.Details;
+		   console.log(data);
+           http.post(api.postSaveComment,data,true).then(res=>{
+			  let r = res.data;
+              if(r.success){
+				  	 this.$message({message: "感谢你的评论",type: 'success',showClose: true});
+			  }else{
+				  this.$message({message: "链接失败,请重新提交",type: 'error',showClose: true});
+			  }
+		   })
 		   }
 	}
 }
 </script>
+
+<style>
+.submit_btn{
+	font-size: 1em;
+    background: #E0BD62;
+    padding: 10px 0;
+    color: #fff;
+    display: block;
+    -webkit-transition: .5s ease-in;
+    transition: .5s ease-in;
+	text-align: center;
+    border-radius: 5px;
+    width: 60%;
+	cursor: pointer;
+}
+.submit_btn:hover{
+	    background: #D57D39;
+}
+@media (max-width: 1080px){
+	.submit_btn{
+		width: 85%;
+	}
+}
+
+
+</style>
