@@ -55,7 +55,7 @@ export default {
       //post请求的拦截器
       axios.interceptors.request.use(config => {
         loadingInstance = Element.Loading.service({
-          lock: true,
+          lock: true, 
           text: '正在请求数据',
           //spinner: 'el-icon-loading',
           background: 'rgba(255, 255, 255, 0)'  
