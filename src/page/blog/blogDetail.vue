@@ -17,8 +17,7 @@
                   
 					</div>
 					<div class="clearfix"> </div>
-					<CommentListComponent :commentList="commentList"></CommentListComponent>
-					<div class="leave-comment">
+					<div class="leave-comment" v-if="IsLogin">
 						<h4>你的评论</h4>
 						<p>留下评论是对我最大的支持.</p>
 						<form>
@@ -27,6 +26,8 @@
 							<div class="clearfix"> </div>
 						</form>
 					</div>
+					<CommentListComponent :commentList="commentList"></CommentListComponent>
+					
 				</div>
 				<!-- //single -->
 			</div>
@@ -62,7 +63,8 @@ export default {
         
 		},
 	computed:mapState({
-         UserInformation:state => state.UserInformation,
+		IsLogin:state => state.IsLogin,
+        UserInformation:state => state.UserInformation,
 	}),
 
 	created() {
@@ -101,7 +103,7 @@ export default {
 		   data.ArticleId = this.form.ArticleId;
 		   data.UserId = this.UserInformation.userid;
 		   data.Details = this.form.Details;
-		   console.log(data);
+		   if(data.Details.length > 3){ this.$message({message: "评论字数必须要大于3哟",type: 'error',showClose: true});return}
            http.post(api.postSaveComment,data,true).then(res=>{
 			  let r = res.data;
               if(r.success){

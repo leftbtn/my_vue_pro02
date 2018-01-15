@@ -1,6 +1,6 @@
 <template>
 	<div class="three-com">
-		<h3>2 Comment
+		<h3>共{{commentList.length}}条
 
 			<label>{{IsLogin?"请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。":"想留下感想请先登录"}}</label>
 		</h3>
@@ -31,7 +31,7 @@
 						<p class="lorem">
 							<span class="from-user"> {{i.FromAccount}} @{{i.ToAccount}}：</span>
 						</p>
-						<p class="lorem click-reply">{{i.details}}.</p>
+						<p class="lorem click-reply" @click="getReplyNeedInfo(i.FromAccount,item.id,i.FromId)">{{i.details}}.</p>
 					</li>
 				</ul>
 
@@ -47,7 +47,7 @@
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button type="warning" @click="dialogFormVisible = false">确 定</el-button>
+				<el-button type="warning" @click="submitReplyInfo()">确 定</el-button>
 			</div>
 		</el-dialog>
 
@@ -83,6 +83,7 @@ export default {
   created() {},
   methods: {
     getReplyNeedInfo(userName, id, userId) {
+      if(userId == this.UserInformation.userid){this.$message({message: "请回复其他人的言论哟",type: 'error',showClose: true}); return}
       this.form.replyName = userName;
       this.form.CommentId = id;
       this.form.FromId = this.UserInformation.userid;
@@ -96,11 +97,16 @@ export default {
       data.FromId = this.form.FromId;
       data.ToId = this.form.ToId;
       data.Details = this.form.content;
+      if(!this.IsLogin){this.$message({message: "请先登录",type: 'error',showClose: true}); return}
+      if(data.Details.length > 3){this.$message({message: "回复字数必须大于3哟",type: 'error',showClose: true}); return}
       http.post(api.postSaveReply, data,true).then(res => {
         let r = res.data;
-        if (r.success) {
-           
-        }
+        if(r.success){
+             this.$message({message: "感谢你的回复",type: 'success',showClose: true});
+             this.form.content = "";
+			  }else{
+				  this.$message({message: "链接失败,请重新提交",type: 'error',showClose: true});
+			  }
       });
     }
   }
@@ -117,6 +123,7 @@ export default {
   font-family: "Microsoft YaHei" !important;
 }
 .second-content .lorem {
+  display: inline;
   margin: 0px !important;
 }
 .second-content .from-user {
@@ -134,6 +141,9 @@ export default {
 }
 .three-com h3 label {
   font-size: 18px;
+}
+.lorem.click-reply{
+  cursor: pointer;
 }
 </style>
 

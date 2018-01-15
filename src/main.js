@@ -44,7 +44,8 @@ if(store.state.IsLogin){
       user.CreateDateTime = r.CreateDateTime;
       user.userid = userid;
       store.commit("SaveUserInformation",user);
-    }else{ this.$message({message: "获取信息失败,请重新登录",type: 'error',showClose: true});}
+
+    }else{ ElementUI.message({message: "获取信息失败,请重新登录",type: 'error',showClose: true});}
  }); 
 }
 
@@ -52,10 +53,12 @@ if(store.state.IsLogin){
 //使用路由验证
 router.beforeEach((to,form,next) =>{
   if(to.path ==='/home'){
+    
     next();
   }
   else{
     if(to.meta.requiresAuth && !store.state.IsLogin){
+      console.log(ElementUI)
       next({path:'/home'});
     }
     else{

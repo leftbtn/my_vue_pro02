@@ -4,9 +4,10 @@ Vue.use(Vuex)
 
 
 const state = new Object();
-state.IsLogin = false;
-state.UserInformation = new Object();
-state.NeedBannerBottom = true;
+state.IsLogin = false; //用户是否登录
+state.UserInformation = new Object(); //用户基本信息
+state.NeedBannerBottom = true;   //是否需要banner底部
+state.RouterIndex = 0;      //当前路由
 
 
 /********改变使用的方法**********/
@@ -21,10 +22,9 @@ mutations.UserIsLogin = (state,data) =>{
  }
 //保存用户信息
 mutations.SaveUserInformation =  (data,user)=>{
-   
     state.UserInformation.userid = user.userid;
     state.UserInformation.Account = user.Account;
-    state.NikeName = user.NikeName;
+    state.UserInformation.NikeName = user.NikeName;
     state.UserInformation.CreateDateTime = user.CreateDateTime;
 }
 //管理是否加载BannerBottom
