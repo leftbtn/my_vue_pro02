@@ -45,7 +45,7 @@ if(store.state.IsLogin){
       user.userid = userid;
       store.commit("SaveUserInformation",user);
 
-    }else{ ElementUI.message({message: "获取信息失败,请重新登录",type: 'error',showClose: true});}
+    }else{ ElementUI.Message({message: "获取信息失败,请重新登录",type: 'error',showClose: true});}
  }); 
 }
 
@@ -58,8 +58,8 @@ router.beforeEach((to,form,next) =>{
   }
   else{
     if(to.meta.requiresAuth && !store.state.IsLogin){
-      console.log(ElementUI)
-      next({path:'/home'});
+      ElementUI.Message({message: "请先登录",type: 'error',showClose: true});
+     next({path:'/home'});
     }
     else{
       next();
