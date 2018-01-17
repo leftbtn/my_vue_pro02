@@ -98,7 +98,7 @@ export default {
       data.ToId = this.form.ToId;
       data.Details = this.form.content;
       if(!this.IsLogin){this.$message({message: "请先登录",type: 'error',showClose: true}); return}
-      if(data.Details.length > 3){this.$message({message: "回复字数必须大于3哟",type: 'error',showClose: true}); return}
+      if(data.Details.length < 3){this.$message({message: "回复字数必须大于3哟",type: 'error',showClose: true}); return}
       http.post(api.postSaveReply, data,true).then(res => {
         let r = res.data;
         if(r.success){
