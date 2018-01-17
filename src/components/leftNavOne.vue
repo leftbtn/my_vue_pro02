@@ -19,9 +19,9 @@
 						<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 							<nav class="stroke">
 								<ul class="nav navbar-nav">
-									<li><router-link to="/home" :class="normal"><i class="home"></i>主页</router-link></li>
+									<li><router-link to="/home" :class="[normal,RouterIndex==1?a:b]"><i class="home"></i>主页</router-link></li>
 									<li style="display:none"><router-link to="/#" :class="normal"><i class="picture1"></i>照片</router-link></li>
-									<li><router-link to="/blog" :class="normal"><i class="edit1"></i>博客</router-link></li>
+									<li><router-link to="/blog" :class="[normal,RouterIndex==2?a:b]"><i class="edit1"></i>博客</router-link></li>
 									<li style="display:none"><router-link to="#" :class="normal"><i class="text-size1"></i>新闻</router-link></li>
 									<li style="display:none"><router-link to="/#" :class="normal"><i class="envelope1"></i>联系我们</router-link></li>
 								</ul>
@@ -34,13 +34,18 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default{
 	data(){
 		return{
 			normal:"hvr-underline-from-left",
+			a:"active",
+			b:""
 		}
-		
-	}
+	},
+	computed: mapState({
+		RouterIndex: state => state.RouterIndex,
+  }),
 }
 </script>
 

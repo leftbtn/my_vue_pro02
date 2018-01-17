@@ -32,6 +32,12 @@ mutations.SetNeedBannerBottom = (data,bool)=>{
     state.NeedBannerBottom = bool;
 }
 
+//改变当前路由下标
+mutations.SetRouterIndex = (data,i)=>{
+    state.RouterIndex = i;
+}
+
+
 
 export default new Vuex.Store({
     state,mutations

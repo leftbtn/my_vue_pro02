@@ -11,7 +11,7 @@ const blogDetail = r => require.ensure([],() => r(require("../page/blog/blogDeta
 
 export default new Router({
   mode: "history",
-  linkActiveClass: "active",
+  //linkActiveClass: "active",
   routes: [
    {
       path: '',

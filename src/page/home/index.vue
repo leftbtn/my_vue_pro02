@@ -23,6 +23,7 @@ import NewsHComponent from '../../components/newsH.vue';
 import FooterComponent from '../../components/footer.vue';
 import {mapState,mapMutations } from 'vuex';
 import qs from 'qs';
+
 export default{
      components: {
     LeftNavOneComponent,
@@ -43,7 +44,10 @@ export default{
     }
   },
 created(){
+
+  
    this.$store.commit("SetNeedBannerBottom",true);
+   this.$store.commit("SetRouterIndex",1);
   //获取轮播列表
    this.axios.get("http://www.digouyouzhennanchi.xyz/api/Carous/GetCarouslList").then(res => {
       let data = res.data.CarouselList;
