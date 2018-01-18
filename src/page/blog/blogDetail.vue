@@ -26,7 +26,7 @@
 							<div class="clearfix"> </div>
 						</form>
 					</div>
-					<CommentListComponent :commentList="commentList"></CommentListComponent>
+					<CommentListComponent :commentList="commentList" @replyIsSuccess="getCommentList(blogId)"></CommentListComponent>
 
 				</div>
 				<!-- //single -->
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       blogDetail: {},
+      blogId:{},
       commentList: [],
       form: {
         ArticleId: "",
@@ -65,6 +66,7 @@ export default {
   }),
 
   created() {
+    this.blogId = this.$route.params.id;
     let id = this.$route.params.id;
     this.$store.commit("SetRouterIndex", 2);
     this.getBlogDetail(id);
@@ -120,6 +122,9 @@ export default {
             type: "success",
             showClose: true
           });
+          let id = this.$route.params.id;
+          this.getCommentList(id);
+          this.form.Details = "";
         } else {
           this.$message({
             message: "链接失败,请重新提交",

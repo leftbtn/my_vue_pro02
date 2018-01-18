@@ -104,6 +104,8 @@ export default {
         if(r.success){
              this.$message({message: "感谢你的回复",type: 'success',showClose: true});
              this.form.content = "";
+             //向父组件传递东西
+             this.$emit("replyIsSuccess");
 			  }else{
 				  this.$message({message: "链接失败,请重新提交",type: 'error',showClose: true});
 			  }
