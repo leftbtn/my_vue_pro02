@@ -14,38 +14,38 @@
 				<div class="msg-text-bottom">
 					<div class="col-md-4 msg-text-bottom-left">
 						<figure class="effect-winston">
-							<a href="single.html"><img src="../assets/images/4.jpg" alt=" " class="img-responsive">
+							<a href="javacript:;"><img src="../assets/images/4.jpg" alt=" " class="img-responsive">
 							<figcaption>
 								
 							</figcaption>		
 							</a>
 						</figure>
 
-						<h3><a href="single.html">vel illum qui dolorem</a></h3>
+						<h3><a href="javacript:;">vel illum qui dolorem</a></h3>
 						<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, 
 							consectetur, adipisci velit, sed quia.</p>
 					</div>
 					<div class="col-md-4 msg-text-bottom-left">
 						<figure class="effect-winston">
-							<a href="single.html"><img src="../assets/images/5.jpg" alt=" " class="img-responsive">
+							<a href="javacript:;"><img src="../assets/images/5.jpg" alt=" " class="img-responsive">
 							<figcaption>
 								
 							</figcaption>	
 							</a>
 						</figure>
-						<h3><a href="single.html">quia dolor sit amet</a></h3>
+						<h3><a href="javacript:;">quia dolor sit amet</a></h3>
 						<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, 
 							consectetur, adipisci velit, sed quia.</p>
 					</div>
 					<div class="col-md-4 msg-text-bottom-left">
 						<figure class="effect-winston">
-							<a href="single.html"><img src="../assets/images/6.jpg" alt=" " class="img-responsive">
+							<a href="javacript:;"><img src="../assets/images/6.jpg" alt=" " class="img-responsive">
 							<figcaption>
 								
 							</figcaption>	
 							</a>
 						</figure>
-						<h3><a href="single.html">porro quisquam est</a></h3>
+						<h3><a href="javacript:;">porro quisquam est</a></h3>
 						<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, 
 							consectetur, adipisci velit, sed quia.</p>
 					</div>
