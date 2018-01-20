@@ -6,11 +6,12 @@ Vue.use(Router);
 
 
 const home = r => require.ensure([], () => r(require("../page/home/index")), "home");
-const blog = r => require.ensure([], () => r(require("../page/blog/index")), "blog")
-const blogDetail = r => require.ensure([],() => r(require("../page/blog/blogDetail")),"blogDetail")
+const blog = r => require.ensure([], () => r(require("../page/blog/index")), "blog");
+const blogDetail = r => require.ensure([],() => r(require("../page/blog/blogDetail")),"blogDetail");
+const personalCenter = r => require.ensure([],()=> r(require("../page/center/index")),"personalCenter");
 
 export default new Router({
-  mode: "",
+  mode: "history",
   //linkActiveClass: "active",
   routes: [
    {
@@ -32,5 +33,12 @@ export default new Router({
         requiresAuth:true,//需要做路由验证时打开
       }
     },
+    {
+      path:"/personalCenter",
+      component:personalCenter,
+      meta:{
+        requiresAuth:true,
+      }
+    }
   ]
 })

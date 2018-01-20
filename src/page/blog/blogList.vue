@@ -7,7 +7,7 @@
 						<div class="col-xs-8 blog-grid-right">
 							<h4><router-link  :to="'/blogDetail/'+item.id">{{item.title}}</router-link></h4>
 							<p>{{item.content}}</p>
-							<router-link  :to="'/blogDetail/'+item.id"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></router-link>
+						
 						</div>
 						<div class="clearfix"> </div>
 					</div>

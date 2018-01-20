@@ -23,7 +23,7 @@
 									<li style="display:none"><router-link to="/#" :class="normal"><i class="picture1"></i>照片</router-link></li>
 									<li><router-link to="/blog" :class="[normal,RouterIndex==2?a:b]"><i class="edit1"></i>博客</router-link></li>
 									<li style="display:none"><router-link to="#" :class="normal"><i class="text-size1"></i>新闻</router-link></li>
-									<li style="display:none"><router-link to="/#" :class="normal"><i class="envelope1"></i>联系我们</router-link></li>
+									<li><router-link to="/personalCenter" :class="[normal,RouterIndex==3?a:b]"><i class="envelope1"></i>个人中心</router-link></li>
 								</ul>
 							</nav>
 						</div>

@@ -3,6 +3,7 @@
 		<div class="banner-body-content">
 			<LeftNavOneComponent></LeftNavOneComponent>
 			<CarouselComponent :CarouselList="CarouselList"></CarouselComponent>
+      <div class="clearfix"> </div>
 			<LeftNavTwoComponent></LeftNavTwoComponent>
 			<div class="col-xs-9 banner-body-right">
 				<TitleBarComponent :titleMsg="titleMsg"></TitleBarComponent>

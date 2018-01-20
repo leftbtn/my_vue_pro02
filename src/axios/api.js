@@ -6,5 +6,7 @@ export default {
     getBlogDetail:'/Blog/GetBlogDetail',
     getCommentList:'/Comment/CommentList',//获取评论列表
     postSaveReply:'/Comment/SaveReply',//保存回复
-    postSaveComment:'/Comment/SaveComment'//保存评论
+    postSaveComment:'/Comment/SaveComment',//保存评论
+    getUserDetailInfo:'/Account/GetUserDeatilInfo',//获取用户详细信息
+    postSaveUserDeatilInfo:'/Account/SaveUserDeatailInfo'//保存用户详细信息
 }
