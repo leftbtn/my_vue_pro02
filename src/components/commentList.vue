@@ -7,7 +7,7 @@
 
 		<div class="tom-grid humour" v-for="item in commentList">
 			<div class="tom">
-				<img src="../assets/images/co.png" alt=" ">
+				<img :src="item.userImg?item.userImg:require('../assets/images/co.png')" alt=" ">
 			</div>
 			<div class="tom-right">
 				<div class="Hardy">
